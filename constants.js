@@ -1,4 +1,18 @@
 const {Client} = require('pg')
+const Pool = require('pg').Pool
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'Perfect Party',
+  password: '123456',
+  port: 5432,
+  max: 10,
+  idleTimeoutMillis: 30000
+})
+
+
+
 client = new Client({
     user: "postgres",
     password: "123456",
@@ -8,5 +22,6 @@ client = new Client({
 })
 
 module.exports = {
-    progres: client
+    pgclient: client,
+    pgpool : pool
 };

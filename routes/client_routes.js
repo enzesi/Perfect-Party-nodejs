@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-let clientInfo = require('../services/client_services');
+let client_service = require('../services/client_services');
 
 /* GET client info. */
 
@@ -17,6 +17,7 @@ let clientInfo = require('../services/client_services');
 
 router.get('/clientInfo', (req, res) => {
   console.log("client Info")
+  res.send(client_service.getClient())
   res.end()
 })
 
