@@ -9,7 +9,11 @@ module.exports = {
         try {
             res = await client.query("INSERT INTO Client VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)",
                 [clientname, password, email, phonenumber, billinginfo, address, advertisement])
+            console.log(res)
+            console.log("insert")
             res = await client.query("SELECT clientID FROM Client WHERE email = '" + email + "'")
+            console.log(res)
+            console.log("clientID")
         }
         catch (err) {
             return {"result": "Create client failed"}

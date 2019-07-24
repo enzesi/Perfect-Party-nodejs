@@ -48,7 +48,7 @@ router.post('/createClient', async (req, res) => {
     var password = req.body.password
     
     const result = await client_service.createClient(clientname, phonenumber, billinginfo, address, advertisement, email, password)
-
+    console.log(result)
     try {
         if ("result" in result) {
             status = 0
