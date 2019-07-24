@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 let client_service = require('../services/client_services');
 
+
 /* GET client info. */
 
 // router.get('/clientInfo', function(req, res, next) {;
@@ -15,10 +16,11 @@ let client_service = require('../services/client_services');
 //   }
 // });
 
-router.get('/clientInfo', (req, res) => {
-  console.log("client Info")
-  res.send(client_service.getClient())
-  res.end()
+router.get('/clientInfo', async (req, res) => {
+  const result = await client_service.getClient()
+  res.send(JSON.stringify(result))
 })
+
+
 
 module.exports = router;

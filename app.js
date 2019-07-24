@@ -5,13 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./index');
-var clientRouter = require('./routes/client_routes');
+var clientRouter = require('./routes/client_routes.js');
 
 var app = express();
 //ar router = express.Router();
 //app.use(router)
-
-//routes setup
 
 
 // view engine setup

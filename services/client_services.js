@@ -19,23 +19,45 @@ module.exports = {
     // }
 
     //using pool to get info
-    getClient: function() {
-        pool.connect(function(err, client, done) {
-            if(err) {
-              return console.error('error fetching client from pool', err);
-            }
-            client.query("SELECT json_build_object('address',address) from client", function(err, result) {
-              //call `done()` to release the client back to the pool
-              done();
+
+    getClient: async function() {
+      /*
+      var data
+      await pool.connect(async function(err, client, done) {
+          if(err) {
+            return console.error('error fetching client from pool', err);
+          }
+          await client.query("SELECT json_build_object('address',address) from client", function(err, result) {
+          //call `done()` to release the client back to the pool
+            done();
           
-              if(err) {
-                return console.error('error running query', err);
-              }
-              console.log(result);
-              return result
-              //output: 1
-            });
-        });
+            if(err) {
+              return console.error('error running query', err);
+            }
+
+            data = result.rows
+            //console.log(result);
+          });
+      });
+      return data
+      */
+
+
+      const client = await pool.connect()
+        
+      try {
+        res = await client.query("SELECT json_build_object('address',address) from client")
+      } 
+      catch (err) {
+        throw err
+      }
+      finally {
+        client.release()
+      }
+      console.log(res.rows)
+      return res.rows
+      
     }
+    
 }
 
