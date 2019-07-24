@@ -11,8 +11,7 @@ const pool = new Pool({
   idleTimeoutMillis: 30000
 })
 
-
-
+//not used
 client = new Client({
     user: "postgres",
     password: "123456",

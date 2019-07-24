@@ -2,51 +2,53 @@ let constant = require('../constants')
 const pool = constant.pgpool
 
 module.exports = {
-    //get client information in postgres 
-    // getClient: async function(params) {
-    //     try {
-    //         //await client.connect();
-    //         console.log("Connected successfully to postgres");
-    //         const results = await pool.query("SELECT json_build_object('address',address) from client");
-    //         console.log(results);
-    //         //await client.end();
-    //         console.log("Client disconnected from postgres");
-    //         return results;
-    //     }
-    //     catch(e) {
-    //         console.log(e);
-    //     }
-    // }
 
-    //using pool to get info
+    createClient: async function(clientname, phonenumber, billinginfo, address, advertisement, email, password) {
+      const client = await pool.connect()
+  
+      try {
+        const res = await client.query("INSERT INTO Client VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)", 
+          [clientname, password, email, phonenumber, billinginfo, address, advertisement])
+      } 
+      catch (err) {
+        throw err
+      }
+      finally {
+        client.release()
+      }
+      return res.rows
+    },
 
-    getClient: async function() {
-      /*
-      var data
-      await pool.connect(async function(err, client, done) {
-          if(err) {
-            return console.error('error fetching client from pool', err);
-          }
-          await client.query("SELECT json_build_object('address',address) from client", function(err, result) {
-          //call `done()` to release the client back to the pool
-            done();
-          
-            if(err) {
-              return console.error('error running query', err);
-            }
-
-            data = result.rows
-            //console.log(result);
-          });
-      });
-      return data
-      */
-
+    getClientID: async function(email, password) {
 
       const client = await pool.connect()
-        
+         
+         try {
+             res = await client.query("SELECT password FROM Client WHERE email = '" + email + "'")
+             console.log(res)
+             console.log(password)
+             if (password == res.rows[0]['password']) {
+                 res = await client.query("SELECT clientID FROM Client WHERE email = '" + email + "'")
+             } else {
+                 return { "result": "WRONG PASSWORD!" }
+             }
+             
+         } 
+         catch (err) {
+             throw err
+         }
+         finally {
+             client.release()
+         }
+         console.log(res.rows)
+         return res.rows
+     },
+
+     getClientInfo: async function() {
+      const client = await pool.connect()
+  
       try {
-        res = await client.query("SELECT json_build_object('address',address) from client")
+        const res = await client.query("SELECT json_build_object('address',address) from client")
       } 
       catch (err) {
         throw err
@@ -56,8 +58,8 @@ module.exports = {
       }
       console.log(res.rows)
       return res.rows
-      
-    }
+    },
+ 
     
 }
 

@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./index');
 var clientRouter = require('./routes/client_routes.js');
+var eventRouter = require('./routes/event_routes.js')
 
 var app = express();
 //ar router = express.Router();
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use(clientRouter);
+app.use(eventRouter);
 
 app.get("/aa", (req, res) => {
   var a = {"a":"aa"}
