@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'Perfect Party',
-  password: 'password',
+  password: '123456',
   port: 5432,
   max: 10,
   idleTimeoutMillis: 30000
