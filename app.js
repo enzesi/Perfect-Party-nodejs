@@ -6,7 +6,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./index');
 var clientRouter = require('./routes/client_routes.js');
-var eventRouter = require('./routes/event_routes.js')
+var eventRouter = require('./routes/event_routes.js');
+var supplierRouter = require('./routes/supplier_routes.js');
+var productRouter = require('./routes/product_routes.js');
+var quoteRouter = require('./routes/quote_routes.js');
+var flowerRouter = require('./routes/flower_routes.js');
+var cateringRouter = require('./routes/catering_routes.js');
+var entertainmentRouter = require('./routes/entertainment_routes.js');
+var locationRouter = require('./routes/location_routes.js');
 
 var app = express();
 //ar router = express.Router();
@@ -26,6 +33,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use(clientRouter);
 app.use(eventRouter);
+app.use(supplierRouter);
+app.use(productRouter);
+app.use(quoteRouter);
+app.use(flowerRouter);
+app.use(cateringRouter);
+app.use(entertainmentRouter);
+app.use(locationRouter);
 
 app.get("/aa", (req, res) => {
   var a = {"a":"aa"}
