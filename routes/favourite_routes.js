@@ -1,18 +1,21 @@
 var express = require('express');
 var router = express.Router();
-let flower_service = require('../services/favourite_services');
+let favourite_service = require('../services/favourite_services');
 
 
 router.get('/createFavEvent/:clientid/:eventid', async (req, res) => {
-    console.log(req)
-
+    //console.log(req)
+    console.log("test")
     var status = 0
 
     var clientId = req.params.clientid
     var eventId = req.params.eventid
     var name = "Favourite event"
 
-    const result = await flower_service.createFavEvent(clientId, eventId, name)
+    console.log(clientId)
+    console.log(eventId)
+
+    const result = await favourite_service.createFavEvent(clientId, eventId, name)
 
     try {
         if ("result" in result) {
@@ -35,11 +38,11 @@ router.get('/deleteFavEvent/:clientid/:eventid', async (req, res) => {
 
     var status = 0
 
-    var clientId = req.params.clientId
-    var eventId = req.params.eventId
+    var clientId = req.params.clientid
+    var eventId = req.params.eventid
     var name = "Favourite event"
 
-    const result = await flower_service. deleteFavEvent(clientId, eventId)
+    const result = await favourite_service.deleteFavEvent(clientId, eventId)
 
     try {
         if ("result" in result) {

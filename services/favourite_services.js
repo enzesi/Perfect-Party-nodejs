@@ -20,8 +20,9 @@ module.exports = {
 
     deleteFavEvent: async function (clientid, eventid) {
         const client = await pool.connect()
-
+        
         try {
+            console.log("Delete from Favourites where client = " + clientid + " and event = " + eventid)
             res = await client.query("Delete from Favourites where client = " + clientid + " and event = " + eventid)
         }
         catch (err) {
