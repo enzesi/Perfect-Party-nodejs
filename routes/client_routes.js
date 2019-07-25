@@ -12,10 +12,11 @@ router.get('/clientInfo', async (req, res) => {
 
 router.post('/clientPassword', async (req, res) => {
     var status = 0
-
-    var email = req.body.email
-    var password = req.body.password
-    
+    var data = req.body.data
+    var email = data.email
+    var password = data.password
+    console.log(email)
+    console.log(password)
     const result = await client_service.getClientID(email, password)
     //console.log(result)
 
@@ -38,14 +39,14 @@ router.post('/clientPassword', async (req, res) => {
 
 router.post('/createClient', async (req, res) => {
     var status = 0
-
-    var clientname = req.body.clientname
-    var phonenumber = req.body.phonenumber
-    var billinginfo = req.body.billinginfo
-    var address = req.body.address
-    var advertisement = req.body.advertisement
-    var email = req.body.email
-    var password = req.body.password
+    var data = req.body.data
+    var clientname = data.name
+    var phonenumber = data.phone
+    var billinginfo = data.billing
+    var address = data.address
+    var advertisement = data.adver
+    var email = data.email
+    var password = data.password
     
     const result = await client_service.createClient(clientname, phonenumber, billinginfo, address, advertisement, email, password)
     console.log(result)
