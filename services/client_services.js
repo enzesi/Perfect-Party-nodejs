@@ -46,15 +46,16 @@ module.exports = {
       const client = await pool.connect()
   
       try {
-        const res = await client.query("select c.clientname from client c where c.clientid = " + id)
+        res = await client.query("select c.clientname from client c where c.clientid = " + id)
+        console.log('clientname')
+        //console.log(res.rows)
       } 
       catch (err) {
-        throw err
+        return { "result": "get clientName failed" }
       }
       finally {
         client.release()
       }
-      console.log(res.rows)
       return res.rows
     },
  

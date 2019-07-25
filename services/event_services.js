@@ -65,6 +65,7 @@ module.exports = {
         finally {
             client.release()
         }
+        console.log(res.rows)
         return JSON.stringify(res.rows)
     },
 

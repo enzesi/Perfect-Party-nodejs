@@ -65,7 +65,7 @@ router.get('/upComingEvent/:id', async (req, res) => {
 router.get('/favouriteEvents/:clientid', async (req, res) => {
     console.log(req)
     var clientid = req.params.clientid
-    const result = await event_service.getFavEvents(id)
+    const result = await event_service.getFavEvents(clientid)
     res.send(JSON.stringify(result))
 })
 
