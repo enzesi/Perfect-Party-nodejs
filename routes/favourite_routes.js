@@ -8,11 +8,11 @@ router.get('/createFavEvent/:clientid/:eventid', async (req, res) => {
 
     var status = 0
 
-    var clientId = req.params.clientId
-    var eventId = req.params.eventId
+    var clientId = req.params.clientid
+    var eventId = req.params.eventid
     var name = "Favourite event"
 
-    const result = await flower_service. createFavEvent(clientId, eventId, name)
+    const result = await flower_service.createFavEvent(clientId, eventId, name)
 
     try {
         if ("result" in result) {

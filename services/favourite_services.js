@@ -5,7 +5,7 @@ module.exports = {
 
     createFavEvent: async function (clientid, eventid, name) {
         const client = await pool.connect()
-
+        console.log(clientid)
         try {
             res = await client.query("INSERT INTO Favourites VALUES ($1, $2, DEFAULT, $3)", [clientid, eventid, name])
         }

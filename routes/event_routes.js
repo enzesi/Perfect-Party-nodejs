@@ -52,21 +52,21 @@ router.get('/pastEvent/:id', async (req, res) => {
     console.log(req)
     var id = req.params.id
     const result = await event_service.getAllPastEvents(id)
-    res.send(JSON.stringify(result))
+    res.send(JSON.parse(result))
 })
 
 router.get('/upComingEvent/:id', async (req, res) => {
     console.log(req)
     var id = req.params.id
     const result = await event_service.getUpComingEvents(id)
-    res.send(JSON.stringify(result))
+    res.send(JSON.parse(result))
 }),
 
 router.get('/favouriteEvents/:clientid', async (req, res) => {
     console.log(req)
     var clientid = req.params.clientid
     const result = await event_service.getFavEvents(clientid)
-    res.send(JSON.stringify(result))
+    res.send(JSON.parse(result))
 })
 
 
