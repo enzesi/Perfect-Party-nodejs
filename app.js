@@ -14,6 +14,7 @@ var flowerRouter = require('./routes/flower_routes.js');
 var cateringRouter = require('./routes/catering_routes.js');
 var entertainmentRouter = require('./routes/entertainment_routes.js');
 var locationRouter = require('./routes/location_routes.js');
+var favouriteRouter = require('./routes/favourite_routes.js')
 
 var app = express();
 //ar router = express.Router();
@@ -30,6 +31,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  next();
+});
+
 app.use('/', indexRouter);
 app.use(clientRouter);
 app.use(eventRouter);
@@ -40,6 +57,7 @@ app.use(flowerRouter);
 app.use(cateringRouter);
 app.use(entertainmentRouter);
 app.use(locationRouter);
+app.use(favouriteRouter);
 
 app.get("/aa", (req, res) => {
   var a = {"a":"aa"}

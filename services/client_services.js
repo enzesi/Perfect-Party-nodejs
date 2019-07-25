@@ -42,11 +42,11 @@ module.exports = {
          return JSON.stringify(res.rows)
      },
 
-     getClientInfo: async function() {
+     getClientName: async function(id) {
       const client = await pool.connect()
   
       try {
-        const res = await client.query("SELECT json_build_object('address',address) from client")
+        const res = await client.query("select c.clientname from client c where c.clientid = " + id)
       } 
       catch (err) {
         throw err

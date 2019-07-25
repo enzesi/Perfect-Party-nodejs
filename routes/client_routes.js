@@ -5,16 +5,17 @@ let client_service = require('../services/client_services');
 
 /* GET client info. */
 
-router.get('/clientInfo', async (req, res) => {
-    const result = await client_service.getClientInfo()
+router.get('/clientName/:clientid', async (req, res) => {
+    var id = req.params.clientid
+    const result = await client_service.getClientName(id)
     res.send(JSON.stringify(result))
 })
 
 router.post('/clientPassword', async (req, res) => {
     var status = 0
-
-    var email = req.body.email
-    var password = req.body.password
+    var data = req.body.data
+    var email = data.email
+    var password = data.password
     
     const result = await client_service.getClientID(email, password)
     //console.log(result)
@@ -39,13 +40,15 @@ router.post('/clientPassword', async (req, res) => {
 router.post('/createClient', async (req, res) => {
     var status = 0
 
-    var clientname = req.body.clientname
-    var phonenumber = req.body.phonenumber
-    var billinginfo = req.body.billinginfo
-    var address = req.body.address
-    var advertisement = req.body.advertisement
-    var email = req.body.email
-    var password = req.body.password
+    var data = req.body.data
+    console.log(data)
+    var clientname = data.name
+    var phonenumber = data.phone
+    var billinginfo = data.billing
+    var address = data.address
+    var advertisement = data.adver
+    var email = data.email
+    var password = data.password
     
     const result = await client_service.createClient(clientname, phonenumber, billinginfo, address, advertisement, email, password)
 

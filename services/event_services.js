@@ -23,5 +23,68 @@ module.exports = {
         return JSON.stringify(res.rows)
     },
 
+    getAllVisibleEvents: async function () {
+        const client = await pool.connect()
+
+        try {
+            res = await client.query("SELECT * FROM EVENT where visibility = '1'")
+        }
+        catch (err) {
+            return { "result": "Get events failed" }
+        }
+        finally {
+            client.release()
+        }
+        return JSON.stringify(res.rows)
+    },
+
+    getUpComingEvents: async function (id) {
+        const client = await pool.connect()
+
+        try {
+            res = await client.query("SELECT * FROM EVENT WHERE client = " + id + " and enddate > current_date")
+        }
+        catch (err) {
+            return { "result": "Get events failed" }
+        }
+        finally {
+            client.release()
+        }
+        return JSON.stringify(res.rows)
+    },
+
+    getAllPastEvents: async function (id) {
+        const client = await pool.connect()
+
+        try {
+            res = await client.query("SELECT * FROM EVENT WHERE client = " + id + " and enddate <= current_date")
+        }
+        catch (err) {
+            return { "result": "Get events failed" }
+        }
+        finally {
+            client.release()
+        }
+        return JSON.stringify(res.rows)
+    },
+
+    getFavEvents: async function (clientid) {
+        const client = await pool.connect()
+
+        try {
+            res = await client.query("select * from Favourites f join Event e " + 
+            "on f.client = e.client and f.event = e.eventid where f.client = " + clientid)
+        }
+        catch (err) {
+            return { "result": "Get events failed" }
+        }
+        finally {
+            client.release()
+        }
+        return JSON.stringify(res.rows)
+    },
+
+
+
 
 }
