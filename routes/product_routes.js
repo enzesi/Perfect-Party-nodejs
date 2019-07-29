@@ -5,12 +5,24 @@ let product_service = require('../services/product_services');
 
 router.post('/createProduct', async (req, res) => {
     var status = 0
-
-    var supplier = req.body.supplier
-    var price = req.body.price
+    var productId = req.body.productId
     var name = req.body.name
+    var type = req.body.type
 
-    const result = await product_service.createProduct(supplier, price, name)
+    const result = await product_service.createProduct(productId, name, type)
+
+    if ("result" in result) {
+        res.status(400).send(result)
+    } else {
+        res.send(result)
+    }
+
+})
+
+/*
+router.get('/product', async (req, res) => {
+    var status = 0
+    const result = await product_service.getProduct(name)
 
     try {
         if ("result" in result) {
@@ -20,7 +32,6 @@ router.post('/createProduct', async (req, res) => {
     catch (err) {
         status = 1
     }
-
     if (status == 0) {
         res.status(400).send(result)
     } else {
@@ -28,6 +39,7 @@ router.post('/createProduct', async (req, res) => {
     }
 
 })
+*/
 
 
 module.exports = router;

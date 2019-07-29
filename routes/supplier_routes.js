@@ -6,22 +6,15 @@ let supplier_service = require('../services/supplier_services');
 router.post('/createSupplier', async (req, res) => {
     var status = 0
 
+    var supplierId = req.body.supplierId
+    var name = req.body.name
     var email = req.body.email
-    var phonenumber = req.body.phonenumber
-    var billingaddress = req.body.billingaddress
+    var phonenumber = req.body.phone
+    var billingaddress = req.body.address
 
-    const result = await supplier_service.createSupplier(email, phonenumber, billingaddress)
+    const result = await supplier_service.createSupplier(name, email, phonenumber, billingaddress)
 
-    try {
-        if ("result" in result) {
-            status = 0
-        }
-    }
-    catch (err) {
-        status = 1
-    }
-
-    if (status == 0) {
+    if ("result" in result) {
         res.status(400).send(result)
     } else {
         res.send(result)

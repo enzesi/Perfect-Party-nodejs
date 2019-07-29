@@ -3,13 +3,18 @@ const pool = constant.pgpool
 
 module.exports = {
 
-    createProduct: async function (supplier, price, name) {
+    createProduct: async function (productId, name, type) {
         const client = await pool.connect()
 
         try {
-            res = await client.query("INSERT INTO Product VALUES (DEFAULT, $1, $2, $3)",
-                [supplier, price, name])
-            res = await client.query("SELECT ProductID FROM Product WHERE name = '" + name + "'")
+            if (productId != -1) {//update
+                
+            }
+            //console.log("INSERT INTO Product VALUES (DEFAULT, '" + name + "')")
+            else {
+                res = await client.query("INSERT INTO Product VALUES (DEFAULT, $1, $2)", [name, type])
+                res = await client.query("SELECT ProductID FROM Product WHERE name = '" + name + "' and type = '" + type + "'")
+            }
         }
         catch (err) {
             return { "result": "Create product failed" }
@@ -17,8 +22,9 @@ module.exports = {
         finally {
             client.release()
         }
-        return JSON.stringify(res.rows)
-    },
+
+        return res.rows[0]
+    }
 
 
 }

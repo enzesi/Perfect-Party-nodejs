@@ -9,7 +9,7 @@ module.exports = {
         try {
             res = await client.query("INSERT INTO Quotes VALUES ($1, $2, DEFAULT, $3)",
                 [product, supplier, price])
-            res = await client.query("SELECT * FROM Quotes WHERE product = '" + product + "'")
+            res = await client.query("SELECT * FROM Quotes WHERE productid = '" + product + "' and supplierid = '" + supplier + "'")
         }
         catch (err) {
             return { "result": "Create quote failed" }
@@ -17,7 +17,7 @@ module.exports = {
         finally {
             client.release()
         }
-        return JSON.stringify(res.rows)
+        return res.rows[0]
     },
 
 
