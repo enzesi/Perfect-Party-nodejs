@@ -5,13 +5,27 @@ let product_service = require('../services/product_services');
 
 router.post('/createProduct', async (req, res) => {
     var status = 0
-    var productId = req.body.productId
-    var name = req.body.name
-    var type = req.body.type
+
+    
+    var productId = req.body.data.productId
+    var name = req.body.data.name
+    var type = req.body.data.type
 
     const result = await product_service.createProduct(productId, name, type)
+    console.log(result)
+    try {
+        if ("result" in result) {
+            status = 0
+        }
+        else {
+            status = -1
+        }
+    }
+    catch (err) {
+        status = 1
+    }
 
-    if ("result" in result) {
+    if (status == 0) {
         res.status(400).send(result)
     } else {
         res.send(result)

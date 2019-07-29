@@ -4,9 +4,9 @@ let quote_service = require('../services/quote_services');
 
 
 router.post('/createQuote', async (req, res) => {
-    var product = req.body.productId
-    var supplier = req.body.supplierId
-    var price = req.body.price
+    var product = req.body.data.productId
+    var supplier = req.body.data.supplierId
+    var price = req.body.data.price
 
     const result = await quote_service.createQuote(product, supplier, price)
     

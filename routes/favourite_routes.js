@@ -34,7 +34,7 @@ router.get('/createFavEvent/:clientid/:eventid', async (req, res) => {
 })
 
 router.get('/deleteFavEvent/:clientid/:eventid', async (req, res) => {
-    console.log(req)
+    //console.log(req)
 
     var status = 0
 

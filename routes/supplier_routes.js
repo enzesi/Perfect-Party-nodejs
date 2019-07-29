@@ -6,11 +6,12 @@ let supplier_service = require('../services/supplier_services');
 router.post('/createSupplier', async (req, res) => {
     var status = 0
 
-    var supplierId = req.body.supplierId
-    var name = req.body.name
-    var email = req.body.email
-    var phonenumber = req.body.phone
-    var billingaddress = req.body.address
+    console.log(req)
+    var supplierId = req.body.data.supplierId
+    var name = req.body.data.name
+    var email = req.body.data.email
+    var phonenumber = req.body.data.phone
+    var billingaddress = req.body.data.address
 
     const result = await supplier_service.createSupplier(name, email, phonenumber, billingaddress)
 

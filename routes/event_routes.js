@@ -7,7 +7,7 @@ router.post('/createEvent', async (req, res) => {
     var status = 0
     var data = req.body.data
 
-    console.log(data)
+    //console.log(data)
 
     var clientID = data.clientId[0].clientid
     var type = data.type

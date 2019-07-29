@@ -18,21 +18,21 @@ router.post('/clientPassword', async (req, res) => {
     var password = data.password
     
     const result = await client_service.getClientID(email, password)
-    //console.log(result)
-
+    console.log(result)
+    console.log(223)
     try {
         if ("result" in result) {
             status = 0
         }
     }
-    catch (err){
+    catch (err) {
         status = 1
     }
-    //console.log(status)
+
     if (status == 0) {
         res.status(400).send(result)
     } else {
-        res.send(result)    
+        res.send(result)
     }
     
 })
